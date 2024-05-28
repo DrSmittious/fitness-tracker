@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fitness Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            float: left;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        #xp-bar {
+            width: 100%;
+            background-color: #ddd;
+            border: 1px solid #000;
+            position: relative;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            background-image: url('https://example.com/ornate-background.jpg'); /* Replace with an appropriate background image */
+        }
+        #xp-fill {
+            width: 0;
+            height: 30px;
+            background-color: #4caf50;
+            background-image: url('https://example.com/knight-armor-pattern.jpg'); /* Replace with a knight armor pattern */
+            border-radius: 10px 0 0 10px;
+            position: relative;
+            z-index: 1;
+        }
+        #xp-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px #000;
+            z-index: 2;
+            top: 0;
+            left: 0;
+        }
+        .activity-buttons {
+            margin-bottom: 20px;
+        }
+        .activity-buttons button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fitness Tracker</h1>
+    </header>
+    <div class="container">
+        <div id="xp-bar">
+            <div id="xp-fill"></div>
+            <div id="xp-text">Level 1: 0/1000 XP</div>
+        </div>
+        <div class="activity-buttons">
+            <button onclick="addXP(1000)">Strength Training</button>
+            <button onclick="addXP(800)">Aerobic Exercise</button>
+            <button onclick="addXP(1500)">HIIT</button>
+            <button onclick="addXP(600)">Pilates</button>
+            <button onclick="addXP(2000)">CrossFit</button>
+            <button onclick="addXP(700)">Calisthenics</button>
+        </div>
+    </div>
+    <script>
+        let currentXP = 0;
+        let currentLevel = 1;
+        const xpPerLevel = [1000, 2000, 3000, 4000, 5000];
+        const xpBar = document.getElementById('xp-fill');
+        const xpText = document.getElementById('xp-text');
+
+        function addXP(amount) {
+            currentXP += amount;
+            if (currentXP >= xpPerLevel[currentLevel - 1]) {
+                currentXP -= xpPerLevel[currentLevel - 1];
+                currentLevel++;
+            }
+            updateXPBar();
+        }
+
+        function updateXPBar() {
+            const requiredXP = xpPerLevel[currentLevel - 1];
+            const percentage = (currentXP / requiredXP) * 100;
+            xpBar.style.width = percentage + '%';
+            xpText.textContent = `Level ${currentLevel}: ${currentXP}/${requiredXP} XP`;
+        }
+    </script>
+</body>
+</html>
